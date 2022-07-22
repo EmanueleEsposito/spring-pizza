@@ -3,21 +3,22 @@
 
 <head>
 	<th:block th:replace="fragments/risorse :: risorse-head"></th:block>
-	<title>Pizza edit</title>
+	<title>Crea o modifica Pizza</title>
 </head>
 
 <body>
 	<nav th:replace="fragments/navbar :: navbar('pizza')"></nav>
 	<div class="container">
-		<h1>New Pizza</h1>
+		<h1 th:text="${pizza.id != null} ? 'Modifica Pizza' : 'Nuova Pizza'">New Pizza</h1>
 		<hr />
 		<!-- form che gestisce l'attributo book -->
 
-		<form id="form-pizza" th:object="${pizza}" th:action="@{/add}" method="POST">
+		<form id="form-pizza" th:object="${pizza}" th:action="@{/salva}" method="POST">
 			<ul>
 				<li th:each="err : ${#fields.allErrors()}" th:text="${err}">
 				</li>
 			</ul>
+			<input type="hidden" th:field="*{id}">
 			<div class="mb-3">
 				<label class="form-label" for="nome">Nome</label>
 				<input type="text" id="nome" class="form-control" th:field="*{nome}" th:errorClass="is-invalid">
@@ -29,7 +30,8 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="prezzo">Prezzo</label>
-				<input type="number" id="prezzo" class="form-control" th:field="*{prezzo}" th:errorClass="is-invalid">
+				<input type="number" step=any id="prezzo" class="form-control" th:field="*{prezzo}"
+					th:errorClass="is-invalid">
 				<div th:if="${#fields.hasErrors('prezzo')}" class="invalid-feedback">
 					<ul>
 						<li th:each="err : ${#fields.errors('prezzo')}" th:text="${err}">
@@ -38,7 +40,7 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label" for="descrizione">Descrizione</label>
-				<input type="text" id="descrizione" class="form-control" th:field="*{descrizione}" >
+				<input type="text" id="descrizione" class="form-control" th:field="*{descrizione}" th:errorClass="is-invalid">
 				<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
 					<ul>
 						<li th:each="err : ${#fields.errors('descrizione')}" th:text="${err}">
@@ -46,8 +48,8 @@
 				</div>
 			</div>
 			<div>
-				<button type="submit" class="btn btn-primary">Save</button>
-				<a class="btn btn-primary" href="/">Cancel</a>
+				<button type="submit" class="btn btn-primary">Salva</button>
+				<a class="btn btn-primary" href="/">Cancella</a>
 			</div>
 		</form>
 	</div>

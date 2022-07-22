@@ -1,7 +1,5 @@
 package jana60.Model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +22,7 @@ public class Pizza {
 
 	@Column(nullable = false)
 	@Min(3)
-	private BigDecimal prezzo;
+	private double prezzo;
 
 	public Integer getId() {
 		return id;
@@ -50,11 +48,11 @@ public class Pizza {
 		this.descrizione = descrizione;
 	}
 
-	public @Min(3) BigDecimal getPrezzo() {
+	public double getPrezzo() {
 		return prezzo;
 	}
 
-	public void setPrezzo(@Min(3) BigDecimal prezzo) {
+	public void setPrezzo(double prezzo) {
 		this.prezzo = prezzo;
 	}
 
