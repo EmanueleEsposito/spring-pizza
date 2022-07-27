@@ -15,7 +15,7 @@
 		</th:block>
 
 		<h1>Pizze</h1>
-		<hr/>
+		<hr />
 		<!-- link che mi porta al controller che restituisce la form -->
 		<a class="btn btn-primary" th:href="@{/salva}">Aggiungi una pizza</a>
 
@@ -32,13 +32,17 @@
 					<td th:text="${p.nome}">Nome</td>
 					<td th:text="${p.prezzo}">Prezzo</td>
 					<td th:text="${p.descrizione}">Descrizione</td>
-
+					<td>
+						<ul>
+							<li th:each="i : ${p.ingredienti}" th:text="${i.nome}"></li>
+						</ul>
+					</td>
 					<td>
 						<a class="btn btn-primary mb-2" th:href="@{|/elimina/${p.id}|}" title="Elimina"
 							onclick="return confirm('Sei Sicuro/a?')">
 							<i class="fa-regular fa-trash-can"></i>
 						</a>
-						
+
 						<a class="btn btn-primary" th:href="@{|/modifica/${p.id}|}" title="Modifica">
 							<i class="fa-solid fa-pen-to-square"></i>
 						</a>

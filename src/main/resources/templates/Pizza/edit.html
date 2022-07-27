@@ -13,44 +13,54 @@
 		<hr />
 		<!-- form che gestisce l'attributo book -->
 
-		<form id="form-pizza" th:object="${pizza}" th:action="@{/salva}" method="POST">
-			<ul>
+		<form id="form-pizza" th:object="${pizza}" th:action="@{/salva}" method="POST" class="row">
+			<ul class="col-12">
 				<li th:each="err : ${#fields.allErrors()}" th:text="${err}">
 				</li>
 			</ul>
-			<input type="hidden" th:field="*{id}">
-			<div class="mb-3">
-				<label class="form-label" for="nome">Nome</label>
-				<input type="text" id="nome" class="form-control" th:field="*{nome}" th:errorClass="is-invalid">
-				<div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">
-					<ul>
-						<li th:each="err : ${#fields.errors('nome')}" th:text="${err}">
-					</ul>
+			<div class="col-8">
+				<input type="hidden" th:field="*{id}">
+				<div class="mb-3">
+					<label class="form-label" for="nome">Nome</label>
+					<input type="text" id="nome" class="form-control" th:field="*{nome}" th:errorClass="is-invalid">
+					<div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">
+						<ul>
+							<li th:each="err : ${#fields.errors('nome')}" th:text="${err}">
+						</ul>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="prezzo">Prezzo</label>
+					<input type="number" step=any id="prezzo" class="form-control" th:field="*{prezzo}"
+						th:errorClass="is-invalid">
+					<div th:if="${#fields.hasErrors('prezzo')}" class="invalid-feedback">
+						<ul>
+							<li th:each="err : ${#fields.errors('prezzo')}" th:text="${err}">
+						</ul>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label class="form-label" for="descrizione">Descrizione</label>
+					<input type="text" id="descrizione" class="form-control" th:field="*{descrizione}"
+						th:errorClass="is-invalid">
+					<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
+						<ul>
+							<li th:each="err : ${#fields.errors('descrizione')}" th:text="${err}">
+						</ul>
+					</div>
+				</div>
+				<div>
+					<button type="submit" class="btn btn-primary">Salva</button>
+					<a class="btn btn-primary" href="/">Cancella</a>
 				</div>
 			</div>
-			<div class="mb-3">
-				<label class="form-label" for="prezzo">Prezzo</label>
-				<input type="number" step=any id="prezzo" class="form-control" th:field="*{prezzo}"
-					th:errorClass="is-invalid">
-				<div th:if="${#fields.hasErrors('prezzo')}" class="invalid-feedback">
-					<ul>
-						<li th:each="err : ${#fields.errors('prezzo')}" th:text="${err}">
-					</ul>
+			<div class="col-4">
+				<h4>Ingredienti</h4>
+				<div class="form-check" th:each="ing : ${ingredientiList}">
+					<input class="form-check-input" th:field="*{ingredienti}" type="checkbox"
+						th:id="|ingredienti_${ing.id}|" th:value="${ing.id}">
+					<label class="form-check-label" th:for="|ingredienti_${ing.id}|" th:text="${ing.nome}"></label>
 				</div>
-			</div>
-			<div class="mb-3">
-				<label class="form-label" for="descrizione">Descrizione</label>
-				<input type="text" id="descrizione" class="form-control" th:field="*{descrizione}" th:errorClass="is-invalid">
-				<div th:if="${#fields.hasErrors('descrizione')}" class="invalid-feedback">
-					<ul>
-						<li th:each="err : ${#fields.errors('descrizione')}" th:text="${err}">
-					</ul>
-				</div>
-			</div>
-			<div>
-				<button type="submit" class="btn btn-primary">Salva</button>
-				<a class="btn btn-primary" href="/">Cancella</a>
-			</div>
 		</form>
 	</div>
 

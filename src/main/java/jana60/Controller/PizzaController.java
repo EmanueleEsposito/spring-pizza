@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jana60.Model.Pizza;
+import jana60.Repository.IngredientiRepository;
 import jana60.Repository.PizzaRepository;
 
 @Controller
@@ -26,6 +27,9 @@ public class PizzaController {
 
 	@Autowired
 	private PizzaRepository repo;
+
+	@Autowired
+	private IngredientiRepository ingredientiRepo;
 
 	@GetMapping
 	public String pizzaList(Model model) {
@@ -36,18 +40,28 @@ public class PizzaController {
 	@GetMapping("/salva")
 	public String pizzaForm(Model model) {
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("ingredientiList", ingredientiRepo.findAllByOrderByNome());
 		return "/pizza/edit";
 	}
 
 	@PostMapping("/salva")
 	public String save(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult br, Model model) {
-		if (br.hasErrors()) {
-			return "pizza/edit";
+		boolean hasErrors = br.hasErrors();
+		if (hasErrors) {
+
+			model.addAttribute("ingredientiList", ingredientiRepo.findAllByOrderByNome());
+			return "/pizza/edit";
 		} else {
-			repo.save(formPizza);
+
+			try {
+				repo.save(formPizza);
+			} catch (Exception e) {
+				model.addAttribute("errorMessage", "Unable to save the Pizza");
+				model.addAttribute("categoryList", ingredientiRepo.findAllByOrderByNome());
+				return "/pizza/edit";
+			}
 			return "redirect:/";
 		}
-
 	}
 
 	@GetMapping("/elimina/{id}")
@@ -68,6 +82,7 @@ public class PizzaController {
 		Optional<Pizza> result = repo.findById(pizzaId);
 		if (result.isPresent()) {
 			model.addAttribute("pizza", result.get());
+			model.addAttribute("ingredientiList", ingredientiRepo.findAllByOrderByNome());
 			return "/pizza/edit";
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pizza con id" + pizzaId + "non è presente");
