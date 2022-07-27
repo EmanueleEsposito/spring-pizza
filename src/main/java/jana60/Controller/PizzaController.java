@@ -1,5 +1,6 @@
 package jana60.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,6 +37,21 @@ public class PizzaController {
 	public String pizzaList(Model model) {
 		model.addAttribute("pizze", repo.findAll());
 		return "/Pizza/list";
+	}
+
+	@GetMapping("/advanced_search")
+	public String advancedSearch() {
+		return "/pizza/search";
+	}
+
+	@GetMapping("/search")
+	public String search(@RequestParam(name = "queryNome") String queryNome, Model model) {
+		if (queryNome != null && queryNome.isEmpty()) {
+			queryNome = null;
+		}
+		List<Pizza> pizze = repo.findByNomeContainingIgnoreCase(queryNome);
+		model.addAttribute("pizze", pizze);
+		return "/pizza/list";
 	}
 
 	@GetMapping("/salva")
