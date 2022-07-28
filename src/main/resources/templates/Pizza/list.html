@@ -3,12 +3,12 @@
 
 <head>
 	<th:block th:replace="fragments/risorse :: risorse-head"></th:block>
-	<title>Pizze</title>
+	<title>Menù Pizze</title>
 </head>
 
 <body>
 	<nav th:replace="fragments/navbar :: navbar('pizza')"></nav>
-	<div class="container">
+	<div class="container-flex bg-warning">
 		<!--messaggi di alert-->
 		<th:block th:if="${successMessage != null && successMessage != ''}">
 			<div class="alert alers-success" th:text="${successMessage}"></div>
@@ -17,7 +17,7 @@
 		<h1>Pizze</h1>
 		<hr />
 		<!-- link che mi porta al controller che restituisce la form -->
-		<a class="btn btn-primary" th:href="@{/salva}">Aggiungi una pizza</a>
+		<a class="btn btn-dark" th:href="@{/salva}">Aggiungi una pizza</a>
 
 		<table class="table" th:if="${pizze.size() > 0}">
 			<thead>
@@ -38,13 +38,16 @@
 						</ul>
 					</td>
 					<td>
-						<a class="btn btn-primary mb-2" th:href="@{|/elimina/${p.id}|}" title="Elimina"
+						<a class="btn btn-dark mb-2" th:href="@{|/elimina/${p.id}|}" title="Elimina"
 							onclick="return confirm('Sei Sicuro/a?')">
 							<i class="fa-regular fa-trash-can"></i>
 						</a>
 
-						<a class="btn btn-primary" th:href="@{|/modifica/${p.id}|}" title="Modifica">
+						<a class="btn btn-dark mb-2" th:href="@{|/modifica/${p.id}|}" title="Modifica">
 							<i class="fa-solid fa-pen-to-square"></i>
+						</a>
+						<a class="btn btn-dark mb-2" th:href="@{|/image/${p.id}|}" title="Images">
+							<i class="fa-solid fa-images"></i>
 						</a>
 					</td>
 				</tr>

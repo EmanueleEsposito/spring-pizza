@@ -8,17 +8,17 @@
 
 <body>
 	<nav th:replace="fragments/navbar :: navbar('ingredienti')"></nav>
-	<div class="container">
+	<div class="container-flex bg-warning">
 		<h1>Ingredienti</h1>
 		<hr />
-		<div class="col-6">
+		<div class="col-6 bg-warning">
 			<form id="form-ingredienti" th:object="${nuovoIngrediente}" th:action="@{/ingredienti/salva}" method="POST">
 
 				<div class="input-group mb-3 has-validation">
 					<input th:field="*{nome}" type="text" class="form-control" placeholder="Aggiungi un Ingrediente"
 						aria-label="Aggiungi un ingrediente" aria-describedby="category-button"
 						th:errorClass="is-invalid">
-					<button class="btn btn-primary" type="submit" id="category-button">Salva</button>
+					<button class="btn btn-dark" type="submit" id="category-button">Salva</button>
 					<div th:if="${#fields.hasErrors('nome')}" class="invalid-feedback">
 						<ul>
 							<li th:each="err : ${#fields.errors('nome')}" th:text="${err}">
@@ -29,10 +29,10 @@
 			</form>
 			<!--  fine form -->
 			<!--  inizio lista  -->
-			<ul class="list-group" th:if="${ingredienti.size() > 0}">
-				<li class="list-group-item" th:each="ing : ${ingredienti}">
+			<ul class="list-group " th:if="${ingredienti.size() > 0}">
+				<li class="list-group-item bg-warning" th:each="ing : ${ingredienti}">
 					<td>
-						<a class="btn btn-primary mb-2" th:href="@{|ingredienti/cancella/${ing.id}|}" title="Cancella"
+						<a class="btn btn-dark mb-2" th:href="@{|ingredienti/cancella/${ing.id}|}" title="Cancella"
 							onclick="return confirm('Sei Sicuro/a?')">
 							<i class="fa-regular fa-trash-can"></i>
 						</a>

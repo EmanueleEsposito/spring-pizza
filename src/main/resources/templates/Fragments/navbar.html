@@ -3,11 +3,13 @@
 
 <body>
 	<!--  navbar (current: book - category) -->
-	<nav th:fragment="navbar(current)" class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav th:fragment="navbar(current)" class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/">
-				Spring Pizza
-				<i class="fa-solid fa-pizza-slice"></i> </a>
+			<img src="https://images-workbench.99static.com/Idgb68J_R1RYXIjHvS2wiLW2xIA=/http://s3.amazonaws.com/projects-files/39/3954/395469/69d4e168-c6e8-485c-af9e-dcd53d4abc3c.jpg"
+					alt="Logo Slice or die Pizza" height="75" class="m-0">
+				Slice or Die Pizza
+		 </a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -28,6 +30,10 @@
 					</li>
 				</ul>
 			</div>
+			 <form action="/search">
+	    	<input class="form-control" type="text" name="queryNome">
+	    	<button>Cerca una Pizza</button>
+	    </form>
 		</div>
 	</nav>
 </body>
