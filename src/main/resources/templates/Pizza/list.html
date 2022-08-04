@@ -32,9 +32,9 @@
 					<td th:text="${p.nome}">Nome</td>
 					<td th:text="${p.prezzo}">Prezzo</td>
 					<td th:text="${p.descrizione}">Descrizione</td>
-					<td>
+					<td >
 						<ul>
-							<li th:each="i : ${p.ingredienti}" th:text="${i.nome}"></li>
+							<li  th:each="i : ${p.ingredienti}" th:text="${i.nome}"></li>
 						</ul>
 					</td>
 					<td>

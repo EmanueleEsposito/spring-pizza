@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Pizza {
 	@Id
@@ -28,6 +30,7 @@ public class Pizza {
 	private double prezzo;
 
 	@ManyToMany
+	@JsonManagedReference
 	private List<Ingredienti> ingredienti;
 
 	public Integer getId() {

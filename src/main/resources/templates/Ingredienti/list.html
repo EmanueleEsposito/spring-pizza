@@ -11,10 +11,10 @@
 	<div class="container-flex bg-warning">
 		<h1>Ingredienti</h1>
 		<hr />
-		<div class="col-6 bg-warning">
+		<div class="col-6 bg-warning ">
 			<form id="form-ingredienti" th:object="${nuovoIngrediente}" th:action="@{/ingredienti/salva}" method="POST">
 
-				<div class="input-group mb-3 has-validation">
+				<div class="input-group mb-3 has-validation ">
 					<input th:field="*{nome}" type="text" class="form-control" placeholder="Aggiungi un Ingrediente"
 						aria-label="Aggiungi un ingrediente" aria-describedby="category-button"
 						th:errorClass="is-invalid">
